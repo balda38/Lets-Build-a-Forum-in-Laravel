@@ -2,6 +2,8 @@
 
 use Illuminate\Foundation\Inspiring;
 
+use Parser\IndexParser;
+
 /*
 |--------------------------------------------------------------------------
 | Console Routes
@@ -16,3 +18,9 @@ use Illuminate\Foundation\Inspiring;
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->describe('Display an inspiring quote');
+
+Artisan::command('parse-threads', function () {
+    $pathToFile = readline('Путь до файла выгрузки: ');
+    $parser = new IndexParser($pathToFile);
+    $parser->parse();
+});
