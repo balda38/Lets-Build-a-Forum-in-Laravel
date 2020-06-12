@@ -26,7 +26,8 @@
         ],
         "psr-4": {
             "App\\": "app/",
-            "Parser\\": "Parser/"
+            "Parser\\": "Parser/",
+            "Util\\": "Util/"
         }
     },
     "autoload-dev": {

@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Inspiring;
 
 use Parser\IndexParser;
+use Util\PathToFileValidator;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,15 @@ Artisan::command('inspire', function () {
 
 Artisan::command('parse-threads', function () {
     $pathToFile = readline('Путь до файла выгрузки: ');
+
+    try {
+        if (!PathToFileValidator::validate($pathToFile, 'txt', true))
+            throw new Exception('Путь до файла выгрузки введен некорректно');
+    } catch (Exception $e) {
+        echo $e->getMessage();
+        die();
+    }
+
     $parser = new IndexParser($pathToFile);
     $parser->parse();
 });
