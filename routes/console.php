@@ -20,9 +20,7 @@ Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->describe('Display an inspiring quote');
 
-Artisan::command('parse-threads', function () {
-    $pathToFile = readline('Путь до файла выгрузки: ');
-
+Artisan::command('parse-threads {pathToFile}', function ($pathToFile) {
     try {
         if (!PathToFileValidator::validate($pathToFile, 'txt', true))
             throw new Exception('Путь до файла выгрузки введен некорректно');
