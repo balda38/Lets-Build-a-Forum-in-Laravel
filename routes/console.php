@@ -2,7 +2,7 @@
 
 use Illuminate\Foundation\Inspiring;
 
-use Parser\IndexParser;
+use Parser\ThreadsParser;
 use Util\PathToFileValidator;
 
 /*
@@ -29,8 +29,11 @@ Artisan::command('parse-threads {pathToFile?}', function ($pathToFile = null) {
             echo $e->getMessage();
             die();
         }
+
+        $parser = new ThreadsParser($pathToFile);
+    } else {
+        $parser = new ThreadsParser();
     }
 
-    $parser = $pathToFile ? new IndexParser($pathToFile) : new IndexParser();
     $parser->parse();
-})->describe('Parse all forum\'s threads with count of replies');
+})->describe('Parse all forum\'s threads with count of replies to them');
