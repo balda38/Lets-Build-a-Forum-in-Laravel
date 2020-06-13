@@ -2,6 +2,10 @@
 
 namespace Util;
 
+/**
+ * The PathToFileValidator provides check validity of path to file.
+ * Also may be checked file existing.
+ */
 class PathToFileValidator
 {
     /**
