@@ -20,15 +20,17 @@ Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->describe('Display an inspiring quote');
 
-Artisan::command('parse-threads {pathToFile}', function ($pathToFile) {
-    try {
-        if (!PathToFileValidator::validate($pathToFile, 'txt', true))
-            throw new Exception('Путь до файла выгрузки введен некорректно');
-    } catch (Exception $e) {
-        echo $e->getMessage();
-        die();
+Artisan::command('parse-threads {pathToFile?}', function ($pathToFile = null) {
+    if ($pathToFile) {
+        try {
+            if (!PathToFileValidator::validate($pathToFile, 'txt'))
+                throw new Exception('Путь до файла выгрузки введен некорректно');
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            die();
+        }
     }
 
-    $parser = new IndexParser($pathToFile);
+    $parser = $pathToFile ? new IndexParser($pathToFile) : new IndexParser();
     $parser->parse();
-});
+})->describe('Parse all forum\'s threads with count of replies');
