@@ -20,7 +20,7 @@ Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->describe('Display an inspiring quote');
 
-Artisan::command('parse-threads {pathToFile?}', function ($pathToFile = null) {
+Artisan::command('parse-threads {pathToFile?}', function ($pathToFile = '') {
     if ($pathToFile) {
         try {
             if (!PathToFileValidator::validate($pathToFile, 'txt'))
@@ -29,11 +29,8 @@ Artisan::command('parse-threads {pathToFile?}', function ($pathToFile = null) {
             echo $e->getMessage();
             die();
         }
-
-        $parser = new ThreadsParser($pathToFile);
-    } else {
-        $parser = new ThreadsParser();
     }
 
+    $parser = new ThreadsParser($pathToFile);
     $parser->parse();
 })->describe('Parse all forum\'s threads with count of replies to them');

@@ -23,7 +23,10 @@ class ThreadsParser
      */
     public function __construct(string $pathToFile = __DIR__.'/threads.txt')
     {
-        $this->pathToFile = $pathToFile;
+        if (!$pathToFile)
+            $this->pathToFile = __DIR__.'/threads.txt';
+        else
+            $this->pathToFile = $pathToFile;
     }
 
     /**
